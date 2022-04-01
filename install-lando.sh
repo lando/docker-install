@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 
+# Question: Should we just git clone the docker install and build it?
 # 1. need to be able to pass in all the flags that the installer does
 # 2. Also need to check that docker has right perms, i.e no sudo if docker is installed
 # 3. Install docker-compose if needed, or do something if it is wrong version
@@ -25,6 +26,7 @@ correct_docker_version() {
 	fi
 }
 
+# check to see if we are on the correct docker-compose version = 1.29.2
 correct_compose_version() {
   COMPOSE_VERSION=$(docker-compose version --short)
   
@@ -59,7 +61,6 @@ if command_exists docker-compose; then
 else
   echo "Installing Docker-compose"
 fi
-
 
 # Verify that we can at least get version output
 if ! docker --version; then
